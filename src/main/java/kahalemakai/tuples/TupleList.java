@@ -6,6 +6,7 @@ import java.util.List;
  * Created by lars on 14.04.16.
  */
 public interface TupleList<T, U> extends List<Tuple<T, U>> {
+
     TupleList<T, U> fromList(final List<Object> list);
     void add(final T first, final U last);
 
@@ -27,4 +28,5 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
     static <S, W> TupleList<S, W> unmodifiableTupleList(final TupleList<S, W> tuples) {
         return new UnmodifiableTupleList<>(tuples);
     }
+
 }
