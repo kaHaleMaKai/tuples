@@ -7,8 +7,26 @@ import java.util.function.Consumer;
  *
  * Created by lars on 14.04.16.
  */
-class UnmodifiableTupleList<T, U> extends TupleListImpl<T, U> {
+class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     private final TupleList<T, U> tuples;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TupleList)) return false;
+        TupleList<?, ?> that = (TupleList<?, ?>) o;
+
+        if (tuples.size() != that.size()) return false;
+        else for (int i = 0; i < tuples.size(); i++) {
+            if (!tuples.get(i).equals(that.get(i))) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return tuples != null ? tuples.hashCode() : 0;
+    }
 
     UnmodifiableTupleList(final TupleList<T, U> tuples) {
         this.tuples = tuples;
@@ -178,5 +196,10 @@ class UnmodifiableTupleList<T, U> extends TupleListImpl<T, U> {
     @Override
     public List<Tuple<T, U>> subList(int fromIndex, int toIndex) {
         return Collections.unmodifiableList(tuples.subList(fromIndex, toIndex));
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Unmodifiable%s", tuples.toString());
     }
 }
