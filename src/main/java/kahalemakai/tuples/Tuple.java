@@ -19,6 +19,10 @@ public class Tuple<T, U> {
 
     @Override
     public String toString() {
-        return String.format("[%s, %s]", first, last);
+        return String.format("(%s, %s)", first, last);
+    }
+
+    public static <S, W> Tuple<S, W> of(final S first, final W last) {
+        return new Tuple<>(first, last);
     }
 }
