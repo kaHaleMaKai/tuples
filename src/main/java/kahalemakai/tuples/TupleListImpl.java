@@ -53,4 +53,30 @@ public class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements Tuple
         add(new Tuple<>(first, last));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TupleList)) return false;
+        TupleList<?, ?> that = (TupleList<?, ?>) o;
+
+        if (this.size() != that.size()) return false;
+        else for (int i = 0; i < this.size(); i++) {
+            if (!this.get(i).equals(that.get(i))) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("TupleList<%s, %s>%s",
+                firstClass.getSimpleName(),
+                lastClass.getSimpleName(),
+                super.toString());
+    }
+
 }
