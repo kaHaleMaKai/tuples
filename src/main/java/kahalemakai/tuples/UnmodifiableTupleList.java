@@ -8,7 +8,7 @@ import java.util.function.Consumer;
  * Created by lars on 14.04.16.
  */
 class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
-    private final TupleList<T, U> tuples;
+    final TupleList<T, U> parent;
 
     @Override
     public boolean equals(Object o) {
@@ -16,20 +16,20 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
         if (!(o instanceof TupleList)) return false;
         TupleList<?, ?> that = (TupleList<?, ?>) o;
 
-        if (tuples.size() != that.size()) return false;
-        else for (int i = 0; i < tuples.size(); i++) {
-            if (!tuples.get(i).equals(that.get(i))) return false;
+        if (parent.size() != that.size()) return false;
+        else for (int i = 0; i < parent.size(); i++) {
+            if (!parent.get(i).equals(that.get(i))) return false;
         }
         return true;
     }
 
     @Override
     public int hashCode() {
-        return tuples != null ? tuples.hashCode() : 0;
+        return parent != null ? parent.hashCode() : 0;
     }
 
     UnmodifiableTupleList(final TupleList<T, U> tuples) {
-        this.tuples = tuples;
+        this.parent = tuples;
     }
 
     static TupleList<Object, Object> EMPTY_LIST = new UnmodifiableTupleList<>(new TupleListImpl<>(Object.class, Object.class));
@@ -46,12 +46,12 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
 
     @Override
     public int size() {
-        return tuples.size();
+        return parent.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return tuples.isEmpty();
+        return parent.isEmpty();
     }
 
     @Override
@@ -63,7 +63,7 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     public Iterator<Tuple<T, U>> iterator() {
         // copy+paste from Collections.unmodifiableCollection
         return new Iterator<Tuple<T, U>>() {
-            private final Iterator<? extends Tuple<T, U>> it = tuples.iterator();
+            private final Iterator<? extends Tuple<T, U>> it = parent.iterator();
 
             public boolean hasNext() {return it.hasNext();}
             public Tuple<T, U> next()          {return it.next();}
@@ -80,12 +80,12 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
 
     @Override
     public Object[] toArray() {
-        return tuples.toArray();
+        return parent.toArray();
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return tuples.toArray(a);
+        return parent.toArray(a);
     }
 
     @Override
@@ -100,7 +100,7 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return tuples.containsAll(c);
+        return parent.containsAll(c);
     }
 
     @Override
@@ -130,7 +130,7 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
 
     @Override
     public Tuple<T, U> get(int index) {
-        return tuples.get(index);
+        return parent.get(index);
     }
 
     @Override
@@ -150,12 +150,12 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
 
     @Override
     public int indexOf(Object o) {
-        return tuples.indexOf(o);
+        return parent.indexOf(o);
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return tuples.lastIndexOf(o);
+        return parent.lastIndexOf(o);
     }
 
     @Override
@@ -167,7 +167,7 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     public ListIterator<Tuple<T, U>> listIterator(int index) {
         return new ListIterator<Tuple<T, U>>() {
             private final ListIterator<? extends Tuple<T, U>> it
-                    = tuples.listIterator(index);
+                    = parent.listIterator(index);
 
             public boolean hasNext()     {return it.hasNext();}
             public Tuple<T, U> next()              {return it.next();}
@@ -194,12 +194,12 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     }
 
     @Override
-    public List<Tuple<T, U>> subList(int fromIndex, int toIndex) {
-        return Collections.unmodifiableList(tuples.subList(fromIndex, toIndex));
+    public UnmodifiableTupleList<T, U> subList(int fromIndex, int toIndex) {
+        return new UnmodifiableTupleList<>(parent.subList(fromIndex, toIndex));
     }
 
     @Override
     public String toString() {
-        return String.format("Unmodifiable%s", tuples.toString());
+        return String.format("Unmodifiable%s", parent.toString());
     }
 }

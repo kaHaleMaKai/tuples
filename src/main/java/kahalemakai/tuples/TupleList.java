@@ -7,7 +7,7 @@ import java.util.List;
  */
 public interface TupleList<T, U> extends List<Tuple<T, U>> {
 
-    TupleList<T, U> fromList(final List<Object> list);
+    TupleList<T, U> fromList(final List<Object> list) throws IllegalStateException;
     void add(final T first, final U last);
 
     @SuppressWarnings("unchecked")
@@ -24,6 +24,9 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
     static <S, W> TupleList<S, W> emptyList() {
         return (TupleList<S, W>) UnmodifiableTupleList.EMPTY_LIST;
     }
+
+    @Override
+    TupleList<T, U> subList(int fromIndex, int toIndex);
 
     static <S, W> TupleList<S, W> unmodifiableTupleList(final TupleList<S, W> tuples) {
         return new UnmodifiableTupleList<>(tuples);
