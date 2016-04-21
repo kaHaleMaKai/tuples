@@ -22,6 +22,12 @@ public class UnmodifiableTupleListTest {
         t1.set(0, Tuple.of(0, "0"));
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void testSubList() throws Exception {
+        TupleList<Integer, String> subList = t1.subList(0, 1);
+        subList.add(3, "c");
+    }
+
     @Before
     public void setUp() throws Exception {
         TupleList<Integer, String> t0 = TupleList.of(Integer.class, String.class);
@@ -29,4 +35,5 @@ public class UnmodifiableTupleListTest {
         t0.add(2, "b");
         t1 = TupleList.unmodifiableTupleList(t0);
     }
+    
 }
