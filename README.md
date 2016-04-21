@@ -1,4 +1,4 @@
-# tuples ![](https://travis-ci.org/kaHaleMaKai/tuples.svg?branch=master)
+# tuples ![](https://travis-ci.org/kaHaleMaKai/tuples.svg?branch=master) [![codecov.io](https://codecov.io/github/kaHaleMaKai/tuples/coverage.svg?branch=master)](https://codecov.io/github/kaHaleMaKai/tuples?branch=master)
 
 a tuple class and type-safe tuple list
 
