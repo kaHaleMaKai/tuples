@@ -4,6 +4,6 @@ os: linux
 branches:
   only:
     - travis-test
-script: ./gradlew
+script: ./gradlew clean test build
 jdk:
   - oraclejdk8
