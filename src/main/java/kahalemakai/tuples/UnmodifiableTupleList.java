@@ -40,11 +40,6 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     }
 
     @Override
-    public void add(T first, U last) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public int size() {
         return parent.size();
     }

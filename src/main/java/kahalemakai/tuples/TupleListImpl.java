@@ -141,10 +141,6 @@ public class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements Tuple
         return super.set(index, element);
     }
 
-    public void add(final T first, final U last)  {
-        add(new Tuple<>(first, last));
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -186,13 +182,6 @@ public class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements Tuple
         @Override
         public TupleList<T, U> fromList(List<Object> list) {
             throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
-        }
-
-        @Override
-        public void add(T first, U last) {
-            checkForComodification();
-            parent.add(lastIndex, new Tuple<>(first, last));
-            resize(1);
         }
 
         TupleSubList(final TupleList<T, U> tupleList, final int firstIndex, final int lastIndex) throws IndexOutOfBoundsException {
@@ -341,18 +330,6 @@ public class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements Tuple
             }
         }
 
-/*        private int incrementParentModCount() throws UnsupportedOperationException {
-            if (parent instanceof TupleListImpl) {
-                return ((TupleListImpl<T, U>) parent).modCount;
-            }
-            else if (parent instanceof TupleSubList) {
-                return ((TupleSubList<T, U>) parent).modCount;
-            }
-            else {
-                throw new UnsupportedOperationException();
-            }
-        }*/
-        // FIXME
         private void checkForComodification() {
             if (modCount != getParentModCount()) {
                 throw new ConcurrentModificationException();

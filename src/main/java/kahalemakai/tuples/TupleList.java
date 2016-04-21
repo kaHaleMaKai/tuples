@@ -8,7 +8,14 @@ import java.util.List;
 public interface TupleList<T, U> extends List<Tuple<T, U>> {
 
     TupleList<T, U> fromList(final List<Object> list) throws IllegalStateException;
-    void add(final T first, final U last);
+
+    default void add(final T first, final U last) {
+        add(size(), first, last);
+    }
+
+    default void add(final int index, final T first, final U last) {
+        add(index, Tuple.of(first, last));
+    };
 
     @SuppressWarnings("unchecked")
     static <S, W> TupleList<S, W> of(Class<S> firstClass, Class<W> secondClass) {
