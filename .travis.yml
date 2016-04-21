@@ -1,0 +1,9 @@
+language: java
+sudo: false
+os: linux
+branches:
+  only:
+    - travis-test
+script: ./gradlew
+jdk:
+  - oraclejdk8
