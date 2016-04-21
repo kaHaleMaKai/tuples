@@ -1,8 +1,10 @@
-# tuples
+# tuples ![](https://travis-ci.org/kaHaleMaKai/tuples.svg?branch=master)
 
 a tuple class and type-safe tuple list
 
-## use it
+---
+
+## how use it
 ```java
 Tuple<Integer, String> tuple = Tuple.of(1, "a"); // or: new Tuple<>(1, "a");
 assert tuple.first() == 1;
