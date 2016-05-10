@@ -22,4 +22,4 @@ jacocoTestReport {
     }
 }
 
-defaultTasks 'clean', 'test', 'build', 'jacocoTestReport'
+defaultTasks 'clean', 'test', 'build', 'jacocoTestReport', 'javadoc'
