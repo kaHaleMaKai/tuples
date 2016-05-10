@@ -1,4 +1,4 @@
-package kahalemakai.tuples;
+package com.github.kahalemakai.tuples;
 
 import java.util.*;
 import java.util.function.Predicate;

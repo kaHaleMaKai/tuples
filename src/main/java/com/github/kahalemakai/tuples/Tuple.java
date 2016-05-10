@@ -1,4 +1,4 @@
-package kahalemakai.tuples;
+package com.github.kahalemakai.tuples;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package kahalemakai.tuples;
+package com.github.kahalemakai.tuples;
 
 import org.junit.Before;
 import org.junit.Test;
