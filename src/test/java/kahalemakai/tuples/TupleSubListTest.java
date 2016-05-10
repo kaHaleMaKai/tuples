@@ -202,4 +202,9 @@ public class TupleSubListTest {
         sl2.size();
     }
 
+    @Test
+    public void testEquals() throws Exception {
+        TupleList<String, Integer> sl2 = t1.subList(0, 2);
+        assertEquals(sl1, sl2);
+    }
 }

@@ -144,6 +144,7 @@ public class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements Tuple
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+        if (this.hashCode() != o.hashCode()) return false;
         if (!(o instanceof TupleList)) return false;
         TupleList<?, ?> that = (TupleList<?, ?>) o;
 
@@ -156,7 +157,10 @@ public class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements Tuple
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        int result = super.hashCode();
+        result = 31 * result + (firstClass != null ? firstClass.hashCode() : 0);
+        result = 31 * result + (lastClass != null ? lastClass.hashCode() : 0);
+        return result;
     }
 
     @Override

@@ -35,5 +35,14 @@ public class UnmodifiableTupleListTest {
         t0.add(2, "b");
         t1 = TupleList.unmodifiableTupleList(t0);
     }
-    
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testAddThrows() throws Exception {
+        t1.add(1, "2");
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testAddAllThrows() throws Exception {
+        t1.addAll(t1);
+    }
 }
