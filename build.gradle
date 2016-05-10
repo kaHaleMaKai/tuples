@@ -1,11 +1,22 @@
-group 'kahalemakai'
-version '0.1.0-SNAPSHOT'
+plugins {
+    id "com.jfrog.bintray" version "1.6"
+}
+
+group 'com.github.kahalemakai'
+version '0.2.2'
+def license = "GPL 3.0"
+def vcsUrl = 'https://github.com/kaHaleMaKai/tuples.git'
+description """Type-safe tuples and tuple list"""
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -19,6 +30,62 @@ dependencies {
 jacocoTestReport {
     reports {
         xml.enabled true
+    }
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId rootProject.group
+            artifactId rootProject.name
+            version rootProject.version
+        }
+    }
+}
+
+bintray {
+    user = bintrayUser
+    key = bintrayApiKey
+    publications = ["MyPublication"]
+    pkg {
+        repo = 'maven'
+        name = rootProject.name
+        licenses = [license]
+        vcsUrl = vcsUrl
+
+        githubRepo = 'kaHaleMaKai/tuples'
+        githubReleaseNotesFile = 'README.md'
+
+        version {
+            name = rootProject.version
+            desc = "Initial version, all tests running."
+            released = new Date()
+
+            gpg {
+                sign = true
+                passphrase = gpgPassPhrase
+            }
+        }
     }
 }
 
