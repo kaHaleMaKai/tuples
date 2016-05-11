@@ -21,7 +21,7 @@ plugins {
 }
 
 group 'com.github.kahalemakai'
-version '0.2.2'
+version '0.2.3'
 def license = "GPL 3.0"
 def vcsUrl = 'https://github.com/kaHaleMaKai/tuples.git'
 description """Type-safe tuples and tuple list"""
@@ -32,7 +32,6 @@ apply plugin: 'idea'
 apply plugin: 'jacoco'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
-//apply plugin: 'signing'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -67,6 +66,7 @@ jacocoTestReport {
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadocDelux
+    dependsOn javadocDelux
 }
 
 task sourcesJar(type: Jar) {
@@ -78,15 +78,11 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
-//signing {
-//    sign configurations.archives
-//}
-
-
 publishing {
     publications {
-        MyPublication(MavenPublication) {
+        tuples(MavenPublication) {
             from components.java
+            artifacts = [javadocJar, sourcesJar]
             groupId rootProject.group
             artifactId rootProject.name
             version rootProject.version
@@ -97,7 +93,7 @@ publishing {
 bintray {
     user = bintrayUser
     key = bintrayApiKey
-    publications = ["MyPublication"]
+    publications = ["tuples"]
     pkg {
         repo = 'maven'
         name = rootProject.name
@@ -107,10 +103,13 @@ bintray {
         githubRepo = 'kaHaleMaKai/tuples'
         githubReleaseNotesFile = 'README.md'
 
+        publicDownloadNumbers = true
+
         version {
             name = rootProject.version
-            desc = "Initial version, all tests running."
+            desc = "add javadocs"
             released = new Date()
+            vcsTag = version
 
             gpg {
                 sign = true
@@ -120,4 +119,4 @@ bintray {
     }
 }
 
-defaultTasks 'clean', 'test', 'build', 'jacocoTestReport', 'javadoc'
+defaultTasks 'clean', 'test', 'build', 'jacocoTestReport', 'javadocDelux'
