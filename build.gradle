@@ -107,7 +107,7 @@ bintray {
             name = rootProject.version
             desc = "add javadocs"
             released = new Date()
-            vcsTag = version
+            vcsTag = rootProject.version
 
             gpg {
                 sign = true
