@@ -29,8 +29,8 @@ public class TupleListTest {
         li.add(2);
         TupleList<String, Integer> t1 = TupleList.of(String.class, Integer.class).fromList(li);
         assertEquals(t1.size(), 2);
-        assertEquals(new Tuple<>("a", 1), t1.get(0));
-        assertEquals(new Tuple<>("b", 2), t1.get(1));
+        assertEquals(Tuple.of("a", 1), t1.get(0));
+        assertEquals(Tuple.of("b", 2), t1.get(1));
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -39,7 +39,7 @@ public class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements Tuple
             } catch (ClassCastException e) {
                 throw new IllegalArgumentException("TupleList.fromList: list elements are of wrong type");
             }
-            this.add(new Tuple<>(firstEl, secondEl));
+            this.add(Tuple.of(firstEl, secondEl));
         }
         return this;
     }

@@ -31,11 +31,11 @@ public class TupleTest {
 
     @Before
     public void setUp() throws Exception {
-        t1 = new Tuple<>(1, "a");
-        t2 = new Tuple<>(1, "a");
-        t3 = new Tuple<>(2, "a");
-        t4 = new Tuple<>(1, "b");
-        t5 = new Tuple<>(1L, "a");
+        t1 = Tuple.of(1, "a");
+        t2 = Tuple.of(1, "a");
+        t3 = Tuple.of(2, "a");
+        t4 = Tuple.of(1, "b");
+        t5 = Tuple.of(1L, "a");
     }
 
     @Test
