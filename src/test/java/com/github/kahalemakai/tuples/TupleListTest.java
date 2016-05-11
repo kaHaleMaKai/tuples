@@ -107,4 +107,10 @@ public class TupleListTest {
         TupleList<String, Number> t3 = TupleList.of(String.class, Number.class).fromList(li0);
         assertNotEquals(t0, t3);
     }
+
+    @Test
+    public void testIdentityOfEmptyMap() throws Exception {
+        assertTrue(TupleList.<Double, Double>emptyList() == TupleList.<Double, Double>emptyList());
+        assertTrue(TupleList.emptyList() == TupleList.emptyList());
+    }
 }
