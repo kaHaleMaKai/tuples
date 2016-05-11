@@ -8,7 +8,7 @@ import java.util.function.UnaryOperator;
  *
  * Created by lars on 14.04.16.
  */
-public class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T, U> {
+class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T, U> {
     final Class<? extends T> firstClass;
     final Class<? extends U> lastClass;
     int modCount = 0;
