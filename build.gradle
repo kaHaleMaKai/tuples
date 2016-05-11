@@ -70,19 +70,17 @@ task javadocJar(type: Jar) {
 }
 
 task sourcesJar(type: Jar) {
+    dependsOn classes
     classifier = 'sources'
     from sourceSets.main.allSource
-}
-
-artifacts {
-    archives javadocJar, sourcesJar
 }
 
 publishing {
     publications {
         tuples(MavenPublication) {
             from components.java
-            artifacts = [javadocJar, sourcesJar]
+            artifact javadocJar
+            artifact sourcesJar
             groupId rootProject.group
             artifactId rootProject.name
             version rootProject.version
@@ -91,8 +89,8 @@ publishing {
 }
 
 bintray {
-    user = hasProperty("bintrayUser") ? bintrayUser : ""
-    key = hasProperty("bintrayApiKey") ? bintrayApiKey : ""
+    user = rootProject.hasProperty("bintrayUser") ? bintrayUser : ""
+    key = rootProject.hasProperty("bintrayApiKey") ? bintrayApiKey : ""
     publications = ["tuples"]
     pkg {
         repo = 'maven'
