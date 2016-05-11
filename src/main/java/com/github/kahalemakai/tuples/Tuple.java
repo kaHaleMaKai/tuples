@@ -54,6 +54,9 @@ public class Tuple<T, U> {
      *
      * @param first first tuple element
      * @param last second tuple element
+     * @param <S> class of first element
+     * @param <W> class of second element
+     * @return a new tuple
      */
     public static <S, W> Tuple<S, W> of(final S first, final W last) {
         return new Tuple<>(first, last);
