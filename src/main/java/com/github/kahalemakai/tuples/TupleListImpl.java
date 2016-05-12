@@ -63,7 +63,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
     }
 
     @Override
-    public void zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
+    public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
         final int len = firstList.size();
         if (secondList.size() != len) {
             throw new IllegalStateException("cannot zip lists of different length together");
@@ -71,6 +71,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         for (int i = 0; i < len; ++i) {
             this.add(firstList.get(i), secondList.get(i));
         }
+        return this;
     }
 
     @SuppressWarnings("unchecked")
@@ -344,7 +345,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         }
 
         @Override
-        public void zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
+        public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
             throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
         }
 

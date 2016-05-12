@@ -55,10 +55,11 @@ public class TupleListTest {
 
     @Test(expected = IllegalStateException.class)
     public void testZipThrows() throws Exception {
-        TupleList<Integer, String> tuples = TupleList.of(Integer.class, String.class);
         final LinkedList<Integer> i = new LinkedList<>(Arrays.asList(1, 2));
         final LinkedList<String> s = new LinkedList<>(Arrays.asList("a", "b", "c"));
-        tuples.zip(i, s);
+        TupleList<Integer, String> tuples = TupleList
+                .of(Integer.class, String.class)
+                .zip(i, s);
         assertEquals(3, tuples.size());
         assertEquals(Tuple.of(1, "a"), tuples.get(0));
         assertEquals(Tuple.of(2, "b"), tuples.get(1));
@@ -67,10 +68,11 @@ public class TupleListTest {
 
     @Test
     public void testZip() throws Exception {
-        TupleList<Integer, String> tuples = TupleList.of(Integer.class, String.class);
         final LinkedList<Integer> i = new LinkedList<>(Arrays.asList(1, 2, 3));
         final LinkedList<String> s = new LinkedList<>(Arrays.asList("a", "b", "c"));
-        tuples.zip(i, s);
+        TupleList<Integer, String> tuples = TupleList
+                .of(Integer.class, String.class)
+                .zip(i, s);
         assertEquals(3, tuples.size());
         assertEquals(Tuple.of(1, "a"), tuples.get(0));
         assertEquals(Tuple.of(2, "b"), tuples.get(1));

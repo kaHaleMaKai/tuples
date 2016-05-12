@@ -58,7 +58,7 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     }
 
     @Override
-    public void zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
+    public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
         throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
     }
 
