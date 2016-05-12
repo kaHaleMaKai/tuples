@@ -45,6 +45,32 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
     }
 
     @Override
+    public void replaceFirstElements(List<T> list) throws IllegalArgumentException {
+        final int len = list.size();
+        if (len != size()) {
+            throw new IllegalArgumentException("argument list and sublist are of different lengths");
+        }
+        for (int i = 0; i < size(); ++i) {
+            final U last = this.get(i).last();
+            final T newEl = list.get(i);
+            this.set(i, newEl, last);
+        }
+    }
+
+    @Override
+    public void replaceLastElements(List<U> list) throws IllegalArgumentException {
+        final int len = list.size();
+        if (len != size()) {
+            throw new IllegalArgumentException("argument list and sublist are of different lengths");
+        }
+        for (int i = 0; i < size(); ++i) {
+            final T first = this.get(i).first();
+            final U newEl = list.get(i);
+            this.set(i, first, newEl);
+        }
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public TupleListImpl<T, U> fromList(final List<Object> list) throws IllegalStateException, IllegalArgumentException {
         if (size() > 0) {
@@ -331,6 +357,32 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         @Override
         public TupleList<T, U> alike() {
             return parent.alike();
+        }
+
+        @Override
+        public void replaceFirstElements(List<T> list) throws IllegalArgumentException {
+            final int len = list.size();
+            if (len != size()) {
+                throw new IllegalArgumentException("argument list and sublist are of different lengths");
+            }
+            for (int i = 0; i < size(); ++i) {
+                final U last = this.get(i).last();
+                final T newEl = list.get(i);
+                this.set(i, newEl, last);
+            }
+        }
+
+        @Override
+        public void replaceLastElements(List<U> list) throws IllegalArgumentException {
+            final int len = list.size();
+            if (len != size()) {
+                throw new IllegalArgumentException("argument list and sublist are of different lengths");
+            }
+            for (int i = 0; i < size(); ++i) {
+                final T first = this.get(i).first();
+                final U newEl = list.get(i);
+                this.set(i, first, newEl);
+            }
         }
 
         public TupleSubList<T, U> subList(int firstIndex, int lastIndex) {

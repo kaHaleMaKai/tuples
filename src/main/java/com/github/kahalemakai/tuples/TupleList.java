@@ -88,6 +88,20 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
     }
 
     /**
+     * Replace all first elements of the {@code TupleList} instance.
+     * @param list list of new elements inserted into first slot of the Tuples
+     * @throws IllegalArgumentException if {@code list} and {@code TupleList} instance have different lengths
+     */
+    void replaceFirstElements(final List<T> list) throws IllegalArgumentException;
+
+    /**
+     * Replace all last elements of the {@code TupleList} instance.
+     * @param list list of new elements inserted into last slot of the Tuples
+     * @throws IllegalArgumentException if {@code list} and {@code TupleList} instance have different lengths
+     */
+    void replaceLastElements(final List<U> list) throws IllegalArgumentException;
+
+    /**
      * Create a new TupleList instance.
      *
      * @param firstClass class of first element of all included tuples

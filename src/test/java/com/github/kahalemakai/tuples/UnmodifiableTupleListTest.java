@@ -21,6 +21,7 @@ package com.github.kahalemakai.tuples;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -81,6 +82,16 @@ public class UnmodifiableTupleListTest {
         final TupleList<Integer, String> alike = t1.alike();
         final TupleList<Integer, String> empty = TupleList.emptyList();
         assertEquals(empty, alike);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testReplaceFirstElements() throws Exception {
+        TupleList.emptyList().replaceFirstElements(new LinkedList<>());;
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testReplaceLastElements() throws Exception {
+        TupleList.emptyList().replaceLastElements(new LinkedList<>());;
     }
 
 }

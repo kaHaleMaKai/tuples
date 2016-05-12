@@ -68,6 +68,16 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     }
 
     @Override
+    public void replaceFirstElements(List<T> list) throws IllegalArgumentException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void replaceLastElements(List<U> list) throws IllegalArgumentException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public int size() {
         return parent.size();
     }

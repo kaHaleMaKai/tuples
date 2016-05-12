@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -256,4 +257,77 @@ public class TupleSubListTest {
     public void testSetOnSublistThrows() throws Exception {
         sl1.set(2, "A", 23);
     }
+
+    @Test
+    public void testReplaceFirstElements() throws Exception {
+        final LinkedList<String> list = new LinkedList<>();
+        list.add("x");
+        list.add("y");
+        list.add("z");
+        t1.replaceFirstElements(list);
+        assertEquals(3, t1.size());
+        assertEquals("x", t1.get(0).first());
+        assertEquals("y", t1.get(1).first());
+        assertEquals("z", t1.get(2).first());
+        assertEquals(Integer.valueOf(1), t1.get(0).last());
+        assertEquals(Integer.valueOf(2), t1.get(1).last());
+        assertEquals(Integer.valueOf(3), t1.get(2).last());
+    }
+
+    @Test
+    public void testReplaceFirstElementsOnSublist() throws Exception {
+        final LinkedList<String> list = new LinkedList<>();
+        list.add("x");
+        list.add("y");
+        sl1.replaceFirstElements(list);
+        assertEquals(2, sl1.size());
+        assertEquals("x", sl1.get(0).first());
+        assertEquals("y", sl1.get(1).first());
+        assertEquals(Integer.valueOf(1), sl1.get(0).last());
+        assertEquals(Integer.valueOf(2), sl1.get(1).last());
+        assertEquals(3, t1.size());
+        assertEquals("x", t1.get(0).first());
+        assertEquals("y", t1.get(1).first());
+        assertEquals("c", t1.get(2).first());
+        assertEquals(Integer.valueOf(1), t1.get(0).last());
+        assertEquals(Integer.valueOf(2), t1.get(1).last());
+        assertEquals(Integer.valueOf(3), t1.get(2).last());
+    }
+
+    @Test
+    public void testReplaceLastElements() throws Exception {
+        final LinkedList<Integer> list = new LinkedList<>();
+        list.add(11);
+        list.add(12);
+        list.add(13);
+        t1.replaceLastElements(list);
+        assertEquals(3, t1.size());
+        assertEquals("a", t1.get(0).first());
+        assertEquals("b", t1.get(1).first());
+        assertEquals("c", t1.get(2).first());
+        assertEquals(Integer.valueOf(11), t1.get(0).last());
+        assertEquals(Integer.valueOf(12), t1.get(1).last());
+        assertEquals(Integer.valueOf(13), t1.get(2).last());
+    }
+
+    @Test
+    public void testReplaceLastElementsOnSublist() throws Exception {
+        final LinkedList<Integer> list = new LinkedList<>();
+        list.add(11);
+        list.add(12);
+        sl1.replaceLastElements(list);
+        assertEquals(2, sl1.size());
+        assertEquals("a", sl1.get(0).first());
+        assertEquals("b", sl1.get(1).first());
+        assertEquals(Integer.valueOf(11), sl1.get(0).last());
+        assertEquals(Integer.valueOf(12), sl1.get(1).last());
+        assertEquals(3, t1.size());
+        assertEquals("a", t1.get(0).first());
+        assertEquals("b", t1.get(1).first());
+        assertEquals("c", t1.get(2).first());
+        assertEquals(Integer.valueOf(11), t1.get(0).last());
+        assertEquals(Integer.valueOf(12), t1.get(1).last());
+        assertEquals(Integer.valueOf(3), t1.get(2).last());
+    }
+
 }
