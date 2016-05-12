@@ -21,7 +21,7 @@ plugins {
 }
 
 group 'com.github.kahalemakai'
-version '0.2.4'
+version '0.2.5'
 def license = "GPL 3.0"
 def vcsUrl = 'https://github.com/kaHaleMaKai/tuples.git'
 description """Type-safe tuples and tuple list"""
