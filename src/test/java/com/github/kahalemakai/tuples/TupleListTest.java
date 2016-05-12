@@ -54,7 +54,12 @@ public class TupleListTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void testZipThrows() throws Exception {
+    public void testZipThrowsStateException() throws Exception {
+        t0.zip(new LinkedList<>(), new LinkedList<>());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testZipThrowsArgumentException() throws Exception {
         final LinkedList<Integer> i = new LinkedList<>(Arrays.asList(1, 2));
         final LinkedList<String> s = new LinkedList<>(Arrays.asList("a", "b", "c"));
         TupleList<Integer, String> tuples = TupleList

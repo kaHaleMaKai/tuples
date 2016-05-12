@@ -53,12 +53,12 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     static TupleList<Object, Object> EMPTY_LIST = new UnmodifiableTupleList<>(new TupleListImpl<>(Object.class, Object.class));
 
     @Override
-    public TupleList<T, U> fromList(List<Object> list) {
+    public TupleList<T, U> fromList(List<Object> list) throws IllegalStateException, IllegalArgumentException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
+    public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException, IllegalArgumentException {
         throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
     }
 

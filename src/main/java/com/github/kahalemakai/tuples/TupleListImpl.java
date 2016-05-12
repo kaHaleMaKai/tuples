@@ -38,7 +38,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
 
     @Override
     @SuppressWarnings("unchecked")
-    public TupleListImpl<T, U> fromList(final List<Object> list) throws IllegalArgumentException, IllegalStateException {
+    public TupleListImpl<T, U> fromList(final List<Object> list) throws IllegalStateException, IllegalArgumentException {
         if (size() > 0) {
             throw new IllegalStateException("TupleList.fromList can only be called on empty lists");
         }
@@ -63,10 +63,13 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
     }
 
     @Override
-    public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
+    public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException, IllegalArgumentException {
+        if (!this.isEmpty()) {
+            throw new IllegalStateException("cannot zip lists into non-empty TupleList");
+        }
         final int len = firstList.size();
         if (secondList.size() != len) {
-            throw new IllegalStateException("cannot zip lists of different length together");
+            throw new IllegalArgumentException("cannot zip lists of different length together");
         }
         for (int i = 0; i < len; ++i) {
             this.add(firstList.get(i), secondList.get(i));
@@ -214,7 +217,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         int modCount;
 
         @Override
-        public TupleList<T, U> fromList(List<Object> list) {
+        public TupleList<T, U> fromList(List<Object> list) throws IllegalStateException, IllegalArgumentException {
             throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
         }
 
@@ -345,7 +348,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         }
 
         @Override
-        public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
+        public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException, IllegalArgumentException {
             throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
         }
 
