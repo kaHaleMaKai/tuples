@@ -28,12 +28,20 @@ import java.util.function.UnaryOperator;
  */
 class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T, U> {
     final Class<? extends T> firstClass;
+
     final Class<? extends U> lastClass;
     int modCount = 0;
 
     TupleListImpl(Class<? extends T> firstClass, Class<? extends U> lastClass) {
         this.firstClass = firstClass;
         this.lastClass = lastClass;
+    }
+
+    @Override
+    public TupleList<T, U> alike() {
+        @SuppressWarnings("unchecked")
+        final TupleList<T, U> tuples = (TupleList<T, U>) TupleList.of(firstClass, lastClass);
+        return tuples;
     }
 
     @Override
@@ -318,6 +326,11 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
                     return get(curIdx++);
                 }
             };
+        }
+
+        @Override
+        public TupleList<T, U> alike() {
+            return parent.alike();
         }
 
         public TupleSubList<T, U> subList(int firstIndex, int lastIndex) {

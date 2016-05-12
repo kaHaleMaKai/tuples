@@ -71,6 +71,12 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
     }
 
     /**
+     * Return a new empty {@code TupleList} of equal type.
+     * @return new {@code TupleList} instance
+     */
+    TupleList<T, U> alike();
+
+    /**
      * Create a new TupleList instance.
      *
      * @param firstClass class of first element of all included tuples

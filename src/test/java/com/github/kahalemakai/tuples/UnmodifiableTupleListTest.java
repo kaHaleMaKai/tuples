@@ -76,4 +76,11 @@ public class UnmodifiableTupleListTest {
         assertEquals("b", lasts.get(1));
     }
 
+    @Test
+    public void testAlike() throws Exception {
+        final TupleList<Integer, String> alike = t1.alike();
+        final TupleList<Integer, String> empty = TupleList.emptyList();
+        assertEquals(empty, alike);
+    }
+
 }

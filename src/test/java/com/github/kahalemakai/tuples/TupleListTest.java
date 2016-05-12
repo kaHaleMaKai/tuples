@@ -169,4 +169,10 @@ public class TupleListTest {
         assertEquals(Integer.valueOf(2), lasts.get(1));
     }
 
+    @Test
+    public void testAlike() throws Exception {
+        final TupleList<String, Integer> alike = t0.alike();
+        final TupleList<String, Integer> empty = TupleList.emptyList();
+        assertEquals(empty, alike);
+    }
 }

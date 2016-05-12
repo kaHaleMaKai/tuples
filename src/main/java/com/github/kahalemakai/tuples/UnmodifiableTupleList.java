@@ -63,6 +63,11 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     }
 
     @Override
+    public TupleList<T, U> alike() {
+        return parent.alike();
+    }
+
+    @Override
     public int size() {
         return parent.size();
     }
