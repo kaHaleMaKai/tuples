@@ -78,6 +78,16 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
     TupleList<T, U> alike();
 
     /**
+     * Set tuple at the given position to {@code Tuple.of(first, last)}.
+     * @param index position where to change the list's value
+     * @param first first element of inserted {@code Tuple} instance
+     * @param last last element of inserted {@code Tuple} instance
+     */
+    default void set(int index, T first, U last) {
+        set(index, Tuple.of(first, last));
+    }
+
+    /**
      * Create a new TupleList instance.
      *
      * @param firstClass class of first element of all included tuples

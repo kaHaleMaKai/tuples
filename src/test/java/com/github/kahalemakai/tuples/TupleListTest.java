@@ -175,4 +175,10 @@ public class TupleListTest {
         final TupleList<String, Integer> empty = TupleList.emptyList();
         assertEquals(empty, alike);
     }
+
+    @Test
+    public void testSet() throws Exception {
+        t0.set(1, "A", 23);
+        assertEquals(Tuple.of("A", 23), t0.get(1));
+    }
 }

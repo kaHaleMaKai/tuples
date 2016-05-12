@@ -243,4 +243,17 @@ public class TupleSubListTest {
         final TupleList<String, Integer> empty = TupleList.emptyList();
         assertEquals(empty, alike);
     }
+
+    @Test
+    public void testSetOnSublist() throws Exception {
+        sl1.set(1, "A", 23);
+        final Tuple<String, Integer> a = Tuple.of("A", 23);
+        assertEquals(a, sl1.get(1));
+        assertEquals(a, t1.get(1));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testSetOnSublistThrows() throws Exception {
+        sl1.set(2, "A", 23);
+    }
 }
