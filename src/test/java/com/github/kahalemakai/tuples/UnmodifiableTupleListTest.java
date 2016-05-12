@@ -94,4 +94,23 @@ public class UnmodifiableTupleListTest {
         TupleList.emptyList().replaceLastElements(new LinkedList<>());;
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void testFromList() throws Exception {
+        t1.fromList(new LinkedList<>());
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testZip() throws Exception {
+        t1.zip(new LinkedList<>(), new LinkedList<>());
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testReplaceFirstElements1() throws Exception {
+        t1.replaceFirstElements(new LinkedList<>());
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testReplaceLastElements1() throws Exception {
+        t1.replaceLastElements(new LinkedList<>());
+    }
 }

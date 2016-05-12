@@ -197,5 +197,11 @@ public class TupleListTest {
         t0.remove(0);
         assertEquals(1, t0.size());
         assertEquals(Tuple.of("b", 2), t0.get(0));
+        t0.removeIf(t -> false);
+        assertEquals(1, t0.size());
+        assertEquals(Tuple.of("b", 2), t0.get(0));
+        t0.removeIf(t -> true);
+        assertEquals(0, t0.size());
     }
+
 }
