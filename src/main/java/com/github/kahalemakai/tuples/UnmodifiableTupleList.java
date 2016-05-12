@@ -89,7 +89,7 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
 
     @Override
     public boolean contains(Object o) {
-        throw new UnsupportedOperationException();
+        return parent.contains(o);
     }
 
     @Override
