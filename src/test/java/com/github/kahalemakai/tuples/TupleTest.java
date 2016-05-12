@@ -25,9 +25,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by lars on 14.04.16.
- */
 public class TupleTest {
     private Tuple<Integer, String> t1;
     private Tuple<Integer, String> t2;
