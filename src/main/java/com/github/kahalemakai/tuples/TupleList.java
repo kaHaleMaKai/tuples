@@ -26,22 +26,23 @@ import java.util.List;
 public interface TupleList<T, U> extends List<Tuple<T, U>> {
 
     /**
-     * Create a new tuple list from an existing list of even-length.
+     * Convert elements from an even-lengthed list into tuples and add them to the {@code TupleList}.
      *
      * @param list list of even length
-     * @return new tuple list
-     * @throws IllegalStateException if list is of odd length or
+     * @return the {@code TupleList} instance
+     * @throws IllegalStateException if {@code TupleList} instance is not empty
+     * @throws IllegalArgumentException if list is of odd length or
      * list is not a sequence of types {@code T, U}
      */
     TupleList<T, U> fromList(final List<Object> list) throws IllegalStateException, IllegalArgumentException;
 
     /**
-     * Create a new tuple list be zipping together two lists.
+     * Zip elements from two lists into tuples and add them to the {@code TupleList}.
      *
      * @param firstList list whose elements are used as first elements in the tuples
      * @param secondList list whose elements are used as second elements in the tuples
-     * @return new tuple list
-     * @throws IllegalStateException if TupleList instance is non-empty
+     * @return the {@code TupleList} instance
+     * @throws IllegalStateException if {@code TupleList} instance is not empty
      * @throws IllegalArgumentException if lists are of different length or TupleList
      * is not empty when calling zip()
      */
