@@ -57,9 +57,20 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
             } catch (ClassCastException e) {
                 throw new IllegalArgumentException("TupleList.fromList: list elements are of wrong type");
             }
-            this.add(Tuple.of(firstEl, secondEl));
+            this.add(firstEl, secondEl);
         }
         return this;
+    }
+
+    @Override
+    public void zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
+        final int len = firstList.size();
+        if (secondList.size() != len) {
+            throw new IllegalStateException("cannot zip lists of different length together");
+        }
+        for (int i = 0; i < len; ++i) {
+            this.add(firstList.get(i), secondList.get(i));
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -330,6 +341,11 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
 
         private String outOfBoundsMsg(int index) {
             return "Index: " + index + ", Size: " + this.size;
+        }
+
+        @Override
+        public void zip(List<T> firstList, List<U> secondList) throws IllegalStateException {
+            throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
         }
 
         void resize(final int amount) {

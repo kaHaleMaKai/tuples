@@ -22,6 +22,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -50,6 +52,30 @@ public class TupleListTest {
         assertEquals(Tuple.of("a", 1), t1.get(0));
         assertEquals(Tuple.of("b", 2), t1.get(1));
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void testZipThrows() throws Exception {
+        TupleList<Integer, String> tuples = TupleList.of(Integer.class, String.class);
+        final LinkedList<Integer> i = new LinkedList<>(Arrays.asList(1, 2));
+        final LinkedList<String> s = new LinkedList<>(Arrays.asList("a", "b", "c"));
+        tuples.zip(i, s);
+        assertEquals(3, tuples.size());
+        assertEquals(Tuple.of(1, "a"), tuples.get(0));
+        assertEquals(Tuple.of(2, "b"), tuples.get(1));
+        assertEquals(Tuple.of(3, "c"), tuples.get(2));
+    }
+
+    @Test
+    public void testZip() throws Exception {
+        TupleList<Integer, String> tuples = TupleList.of(Integer.class, String.class);
+        final LinkedList<Integer> i = new LinkedList<>(Arrays.asList(1, 2, 3));
+        final LinkedList<String> s = new LinkedList<>(Arrays.asList("a", "b", "c"));
+        tuples.zip(i, s);
+        assertEquals(3, tuples.size());
+        assertEquals(Tuple.of(1, "a"), tuples.get(0));
+        assertEquals(Tuple.of(2, "b"), tuples.get(1));
+        assertEquals(Tuple.of(3, "c"), tuples.get(2));
+        }
 
     @Test(expected = IllegalArgumentException.class)
     public void testFromThrowsOnOddNumber() throws Exception {

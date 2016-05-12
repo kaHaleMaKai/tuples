@@ -43,7 +43,7 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      * @return new tuple list
      * @throws IllegalStateException if lists are of different length
      */
-    TupleList<T, U> zip(final List<T> firstList, final List<U> secondList) throws IllegalStateException;
+    void zip(final List<T> firstList, final List<U> secondList) throws IllegalStateException;
 
     /**
      * Add a new tuple to the end of the list.
