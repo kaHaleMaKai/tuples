@@ -61,4 +61,12 @@ public class TupleTest {
         assertEquals(Integer.valueOf(1), t1.first());
         assertEquals("a", t1.last());
     }
+
+    @Test
+    public void testContains() throws Exception {
+        assertTrue(t1.contains(1));
+        assertTrue(t1.contains("a"));
+        assertTrue(t5.contains(1L));
+        assertFalse(t1.contains("error"));
+    }
 }

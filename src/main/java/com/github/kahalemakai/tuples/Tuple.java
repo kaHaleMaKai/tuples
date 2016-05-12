@@ -67,4 +67,13 @@ public class Tuple<T, U> {
         return String.format("(%s, %s)", first, last);
     }
 
+    /**
+     * Check if a tuple contains an object.
+     *
+     * @param o object to be looked up
+     * @return whether object is present or not
+     */
+    public boolean contains(Object o) {
+        return first.equals(o) || last.equals(o);
+    }
 }
