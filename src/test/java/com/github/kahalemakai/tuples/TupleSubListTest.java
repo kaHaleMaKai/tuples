@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -225,4 +226,15 @@ public class TupleSubListTest {
         TupleList<String, Integer> sl2 = t1.subList(0, 2);
         assertEquals(sl1, sl2);
     }
+
+    @Test
+    public void testElementSlicing() throws Exception {
+        final List<String> firsts = sl1.firstElements();
+        assertEquals("a", firsts.get(0));
+        assertEquals("b", firsts.get(1));
+        final List<Integer> lasts = sl1.lastElements();
+        assertEquals(Integer.valueOf(1), lasts.get(0));
+        assertEquals(Integer.valueOf(2), lasts.get(1));
+    }
+
 }

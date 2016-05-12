@@ -82,7 +82,7 @@ public class TupleListTest {
         assertEquals(Tuple.of(1, "a"), tuples.get(0));
         assertEquals(Tuple.of(2, "b"), tuples.get(1));
         assertEquals(Tuple.of(3, "c"), tuples.get(2));
-        }
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testFromThrowsOnOddNumber() throws Exception {
@@ -160,8 +160,13 @@ public class TupleListTest {
     }
 
     @Test
-    public void testIdentityOfEmptyMap() throws Exception {
-        assertTrue(TupleList.<Double, Double>emptyList() == TupleList.<Double, Double>emptyList());
-        assertTrue(TupleList.emptyList() == TupleList.emptyList());
+    public void testElementSlicing() throws Exception {
+        final List<String> firsts = t0.firstElements();
+        assertEquals("a", firsts.get(0));
+        assertEquals("b", firsts.get(1));
+        final List<Integer> lasts = t0.lastElements();
+        assertEquals(Integer.valueOf(1), lasts.get(0));
+        assertEquals(Integer.valueOf(2), lasts.get(1));
     }
+
 }

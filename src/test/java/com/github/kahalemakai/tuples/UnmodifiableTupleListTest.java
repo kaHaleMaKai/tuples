@@ -21,6 +21,8 @@ package com.github.kahalemakai.tuples;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -63,4 +65,15 @@ public class UnmodifiableTupleListTest {
     public void testAddAllThrows() throws Exception {
         t1.addAll(t1);
     }
+
+    @Test
+    public void testElementSlicing() throws Exception {
+        final List<Integer> firsts = t1.firstElements();
+        final List<String> lasts = t1.lastElements();
+        assertEquals(Integer.valueOf(1), firsts.get(0));
+        assertEquals(Integer.valueOf(2), firsts.get(1));
+        assertEquals("a", lasts.get(0));
+        assertEquals("b", lasts.get(1));
+    }
+
 }
