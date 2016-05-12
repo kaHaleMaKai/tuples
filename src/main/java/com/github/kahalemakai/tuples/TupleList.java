@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package com.github.kahalemakai.tuples;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -127,7 +128,7 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
     TupleList<T, U> subList(int fromIndex, int toIndex);
 
     /**
-     * Return a list of all first elements in the tuples.
+     * Return an unmodifiable list of all first elements in the tuples.
      * @return list of first elements.
      */
     default List<T> firstElements() {
@@ -135,11 +136,11 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
         for (Tuple<T, U> tuple : this) {
             li.add(tuple.first());
         }
-        return li;
+        return Collections.unmodifiableList(li);
     }
 
     /**
-     * Return a list of all second elements in the tuples.
+     * Return an unmodifiable list of all second elements in the tuples.
      * @return list of second elements.
      */
     default List<U> lastElements() {
@@ -147,7 +148,7 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
         for (Tuple<T, U> tuple : this) {
             li.add(tuple.last());
         }
-        return li;
+        return Collections.unmodifiableList(li);
     }
 
     /**
