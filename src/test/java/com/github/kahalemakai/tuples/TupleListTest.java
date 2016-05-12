@@ -110,7 +110,8 @@ public class TupleListTest {
         li0.add(1);
         li0.add("b");
         li0.add(2);
-        t0 = TupleList.of(String.class, Integer.class)
+        t0 = TupleList
+                .of(String.class, Integer.class)
                 .fromList(li0);
 
     }
@@ -180,5 +181,21 @@ public class TupleListTest {
     public void testSet() throws Exception {
         t0.set(1, "A", 23);
         assertEquals(Tuple.of("A", 23), t0.get(1));
+    }
+
+    @Test
+    public void testReplaceAll() throws Exception {
+        t0.replaceAll(t -> Tuple.of(t.first().toUpperCase(), t.last() + 10));
+        assertEquals("A", t0.get(0).first());
+        assertEquals("B", t0.get(1).first());
+        assertEquals(Integer.valueOf(11), t0.get(0).last());
+        assertEquals(Integer.valueOf(12), t0.get(1).last());
+    }
+
+    @Test
+    public void testRemove() throws Exception {
+        t0.remove(0);
+        assertEquals(1, t0.size());
+        assertEquals(Tuple.of("b", 2), t0.get(0));
     }
 }
