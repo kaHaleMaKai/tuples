@@ -18,9 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package com.github.kahalemakai.tuples;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * A type-safe, compile-time checked list of tuples.
@@ -150,6 +148,21 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      */
     @Override
     TupleList<T, U> subList(int fromIndex, int toIndex);
+
+    /**
+     * Return a new, unmodifiable map with each tuple turned into a key-value pair.
+     * <p>
+     * In case of key collisions, the tuple with the higher index
+     * in the TupleList is given preference.
+     * @return
+     */
+    default Map<T, U> asMap() {
+        Map<T, U> m = new HashMap<>();
+        for (Tuple<T, U> tuple : this) {
+            m.put(tuple.first(), tuple.last());
+        }
+        return Collections.unmodifiableMap(m);
+    }
 
     /**
      * Return an unmodifiable list of all first elements in the tuples.

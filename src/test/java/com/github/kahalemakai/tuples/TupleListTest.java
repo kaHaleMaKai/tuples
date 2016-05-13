@@ -21,10 +21,7 @@ package com.github.kahalemakai.tuples;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -190,6 +187,13 @@ public class TupleListTest {
         assertEquals("B", t0.get(1).first());
         assertEquals(Integer.valueOf(11), t0.get(0).last());
         assertEquals(Integer.valueOf(12), t0.get(1).last());
+    }
+
+    @Test
+    public void testAsMap() throws Exception {
+        final Map<String, Integer> m = t0.asMap();
+        assertEquals(Integer.valueOf(1), m.get("a"));
+        assertEquals(Integer.valueOf(2), m.get("b"));
     }
 
     @Test
