@@ -30,11 +30,10 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      *
      * @param iterable iterable of even length
      * @return the {@code TupleList} instance
-     * @throws IllegalStateException if {@code TupleList} instance is not empty
      * @throws IllegalArgumentException if {@code iterable} is of odd length or
      * {@code iterable} is not a sequence of types {@code T, U}
      */
-    TupleList<T, U> fromList(final Iterable<?> iterable) throws IllegalStateException, IllegalArgumentException;
+    TupleList<T, U> slurp(final Iterable<?> iterable) throws IllegalArgumentException;
 
     /**
      * Zip elements from two lists into tuples and add them to the {@code TupleList}.
@@ -42,11 +41,9 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      * @param first list whose elements are used as first elements in the tuples
      * @param last list whose elements are used as second elements in the tuples
      * @return the {@code TupleList} instance
-     * @throws IllegalStateException if {@code TupleList} instance is not empty
-     * @throws IllegalArgumentException if lists are of different length or TupleList
-     * is not empty when calling zip()
+     * @throws IllegalArgumentException if lists are of different length
      */
-    TupleList<T, U> zip(final Iterable<T> first, final Iterable<U> last) throws IllegalStateException, IllegalArgumentException;
+    TupleList<T, U> zip(final Iterable<T> first, final Iterable<U> last) throws IllegalArgumentException;
 
     /**
      * Add a new tuple to the end of the list.

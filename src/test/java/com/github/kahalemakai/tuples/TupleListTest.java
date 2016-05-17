@@ -36,7 +36,7 @@ public class TupleListTest {
     @Test
     public void testFrom() throws Exception {
         List<Object> li = new ArrayList<>();
-        TupleList<String, Integer> t0 = TupleList.of(String.class, Integer.class).fromList(li);
+        TupleList<String, Integer> t0 = TupleList.of(String.class, Integer.class).slurp(li);
         assertEquals(t0.size(), 0);
         assertEquals(TupleList.emptyList(), t0);
 
@@ -44,15 +44,10 @@ public class TupleListTest {
         li.add(1);
         li.add("b");
         li.add(2);
-        TupleList<String, Integer> t1 = TupleList.of(String.class, Integer.class).fromList(li);
+        TupleList<String, Integer> t1 = TupleList.of(String.class, Integer.class).slurp(li);
         assertEquals(t1.size(), 2);
         assertEquals(Tuple.of("a", 1), t1.get(0));
         assertEquals(Tuple.of("b", 2), t1.get(1));
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void testZipThrowsStateException() throws Exception {
-        t0.zip(new LinkedList<>(), new LinkedList<>());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -87,7 +82,7 @@ public class TupleListTest {
         li.add("a");
         li.add(1);
         li.add("b");
-        TupleList.of(String.class, Integer.class).fromList(li);
+        TupleList.of(String.class, Integer.class).slurp(li);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -97,7 +92,7 @@ public class TupleListTest {
         li.add(1);
         li.add("b");
         li.add("b");
-        TupleList<String, Integer> t = TupleList.of(String.class, Integer.class).fromList(li);
+        TupleList<String, Integer> t = TupleList.of(String.class, Integer.class).slurp(li);
     }
 
     @Before
@@ -109,7 +104,7 @@ public class TupleListTest {
         li0.add(2);
         t0 = TupleList
                 .of(String.class, Integer.class)
-                .fromList(li0);
+                .slurp(li0);
 
     }
 
@@ -125,19 +120,14 @@ public class TupleListTest {
         assertEquals(secondModCount, thirdModCount);
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void testFromListThrows() throws Exception {
-        t0.fromList(li0);
-    }
-
     @Test
     public void testHashCode() throws Exception {
         TupleList<String, Integer> t1 = TupleList.of(String.class, Integer.class)
-                .fromList(li0);
+                .slurp(li0);
         TupleList<String, Integer> t2 = TupleList.of(String.class, Integer.class)
-                .fromList(li0);
+                .slurp(li0);
         TupleList<String, Number> t3 = TupleList.of(String.class, Number.class)
-                .fromList(li0);
+                .slurp(li0);
         assertTrue(t1.hashCode() == t2.hashCode());
         assertFalse(t1.hashCode() == t3.hashCode());
     }
@@ -145,7 +135,7 @@ public class TupleListTest {
     @Test
     public void testEquals() throws Exception {
         TupleList<String, Integer> t1 = TupleList.of(String.class, Integer.class)
-                .fromList(li0);
+                .slurp(li0);
         assertEquals(t0, t1);
         t1.remove(0);
         assertNotEquals(t0, t1);
@@ -153,7 +143,7 @@ public class TupleListTest {
         assertNotEquals(t0, 1);
         t1.add("p", 9);
         assertNotEquals(t0, t1);
-        TupleList<String, Number> t3 = TupleList.of(String.class, Number.class).fromList(li0);
+        TupleList<String, Number> t3 = TupleList.of(String.class, Number.class).slurp(li0);
         assertNotEquals(t0, t3);
     }
 

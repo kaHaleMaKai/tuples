@@ -96,7 +96,7 @@ public class UnmodifiableTupleListTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void testFromList() throws Exception {
-        t1.fromList(new LinkedList<>());
+        t1.slurp(new LinkedList<>());
     }
 
     @Test(expected = UnsupportedOperationException.class)
