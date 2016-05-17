@@ -72,22 +72,19 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
 
     @Override
     @SuppressWarnings("unchecked")
-    public TupleListImpl<T, U> fromList(final List<Object> list) throws IllegalStateException, IllegalArgumentException {
+    public TupleListImpl<T, U> fromList(final Iterable<?> iterable) throws IllegalStateException, IllegalArgumentException {
         if (size() > 0) {
             throw new IllegalStateException("TupleList.fromList can only be called on empty lists");
         }
 
-        final int len = list.size();
-        if (len % 2 != 0) {
-            throw new IllegalArgumentException("TupleList.fromList expects a list of even legnth");
-        }
-        int i = 0;
-        while (i < len) {
+        for (final Iterator<?> it = iterable.iterator(); it.hasNext();) {
             T firstEl;
             U secondEl;
             try {
-                firstEl = firstClass.cast(list.get(i++));
-                secondEl = lastClass.cast(list.get(i++));
+                firstEl = firstClass.cast(it.next());
+                secondEl = lastClass.cast(it.next());
+            } catch (NoSuchElementException e) {
+                throw new IllegalArgumentException("TupleList.fromList expects an iterable of even legnth");
             } catch (ClassCastException e) {
                 throw new IllegalArgumentException("TupleList.fromList: list elements are of wrong type");
             }
@@ -97,16 +94,20 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
     }
 
     @Override
-    public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException, IllegalArgumentException {
+    public TupleList<T, U> zip(Iterable<T> first, Iterable<U> last) throws IllegalStateException, IllegalArgumentException {
         if (!this.isEmpty()) {
             throw new IllegalStateException("cannot zip lists into non-empty TupleList");
         }
-        final int len = firstList.size();
-        if (secondList.size() != len) {
-            throw new IllegalArgumentException("cannot zip lists of different length together");
+
+        final Iterator<T> it1 = first.iterator();
+        final Iterator<U> it2 = last.iterator();
+        while (it1.hasNext() && it2.hasNext()) {
+            final T t = it1.next();
+            final U u = it2.next();
+            this.add(t, u);
         }
-        for (int i = 0; i < len; ++i) {
-            this.add(firstList.get(i), secondList.get(i));
+        if (it1.hasNext() || it2.hasNext()) {
+            throw new IllegalArgumentException("cannot zip iterables of different length together");
         }
         return this;
     }
@@ -251,7 +252,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         int modCount;
 
         @Override
-        public TupleList<T, U> fromList(List<Object> list) throws IllegalStateException, IllegalArgumentException {
+        public TupleList<T, U> fromList(Iterable<?> iterable) throws IllegalStateException, IllegalArgumentException {
             throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
         }
 
@@ -413,7 +414,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         }
 
         @Override
-        public TupleList<T, U> zip(List<T> firstList, List<U> secondList) throws IllegalStateException, IllegalArgumentException {
+        public TupleList<T, U> zip(Iterable<T> first, Iterable<U> last) throws IllegalStateException, IllegalArgumentException {
             throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
         }
 

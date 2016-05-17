@@ -26,27 +26,27 @@ import java.util.*;
 public interface TupleList<T, U> extends List<Tuple<T, U>> {
 
     /**
-     * Convert elements from an even-lengthed list into tuples and add them to the {@code TupleList}.
+     * Convert elements from an iterable of even length into tuples and add them to the {@code TupleList}.
      *
-     * @param list list of even length
+     * @param iterable iterable of even length
      * @return the {@code TupleList} instance
      * @throws IllegalStateException if {@code TupleList} instance is not empty
-     * @throws IllegalArgumentException if list is of odd length or
-     * list is not a sequence of types {@code T, U}
+     * @throws IllegalArgumentException if {@code iterable} is of odd length or
+     * {@code iterable} is not a sequence of types {@code T, U}
      */
-    TupleList<T, U> fromList(final List<Object> list) throws IllegalStateException, IllegalArgumentException;
+    TupleList<T, U> fromList(final Iterable<?> iterable) throws IllegalStateException, IllegalArgumentException;
 
     /**
      * Zip elements from two lists into tuples and add them to the {@code TupleList}.
      *
-     * @param firstList list whose elements are used as first elements in the tuples
-     * @param secondList list whose elements are used as second elements in the tuples
+     * @param first list whose elements are used as first elements in the tuples
+     * @param last list whose elements are used as second elements in the tuples
      * @return the {@code TupleList} instance
      * @throws IllegalStateException if {@code TupleList} instance is not empty
      * @throws IllegalArgumentException if lists are of different length or TupleList
      * is not empty when calling zip()
      */
-    TupleList<T, U> zip(final List<T> firstList, final List<U> secondList) throws IllegalStateException, IllegalArgumentException;
+    TupleList<T, U> zip(final Iterable<T> first, final Iterable<U> last) throws IllegalStateException, IllegalArgumentException;
 
     /**
      * Add a new tuple to the end of the list.
