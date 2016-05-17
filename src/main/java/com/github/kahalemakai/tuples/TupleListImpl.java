@@ -45,7 +45,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
     }
 
     @Override
-    public void replaceFirstElements(List<T> list) throws IllegalArgumentException {
+    public void replaceFirstElements(List<? extends T> list) throws IllegalArgumentException {
         final int len = list.size();
         if (len != size()) {
             throw new IllegalArgumentException("argument list and sublist are of different lengths");
@@ -58,7 +58,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
     }
 
     @Override
-    public void replaceLastElements(List<U> list) throws IllegalArgumentException {
+    public void replaceLastElements(List<? extends U> list) throws IllegalArgumentException {
         final int len = list.size();
         if (len != size()) {
             throw new IllegalArgumentException("argument list and sublist are of different lengths");
@@ -90,9 +90,9 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
     }
 
     @Override
-    public TupleList<T, U> zip(Iterable<T> first, Iterable<U> last) throws IllegalArgumentException {
-        final Iterator<T> it1 = first.iterator();
-        final Iterator<U> it2 = last.iterator();
+    public TupleList<T, U> zip(Iterable<? extends T> first, Iterable<? extends U> last) throws IllegalArgumentException {
+        final Iterator<? extends T> it1 = first.iterator();
+        final Iterator<? extends U> it2 = last.iterator();
         final int len = size();
         while (it1.hasNext() && it2.hasNext()) {
             final T t = it1.next();
@@ -357,7 +357,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         }
 
         @Override
-        public void replaceFirstElements(List<T> list) throws IllegalArgumentException {
+        public void replaceFirstElements(List<? extends T> list) throws IllegalArgumentException {
             final int len = list.size();
             if (len != size()) {
                 throw new IllegalArgumentException("argument list and sublist are of different lengths");
@@ -370,7 +370,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         }
 
         @Override
-        public void replaceLastElements(List<U> list) throws IllegalArgumentException {
+        public void replaceLastElements(List<? extends U> list) throws IllegalArgumentException {
             final int len = list.size();
             if (len != size()) {
                 throw new IllegalArgumentException("argument list and sublist are of different lengths");
@@ -410,7 +410,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         }
 
         @Override
-        public TupleList<T, U> zip(Iterable<T> first, Iterable<U> last) throws IllegalArgumentException {
+        public TupleList<T, U> zip(Iterable<? extends T> first, Iterable<? extends U> last) throws IllegalArgumentException {
             throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
         }
 

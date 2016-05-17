@@ -58,7 +58,7 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     }
 
     @Override
-    public TupleList<T, U> zip(Iterable<T> first, Iterable<U> last) throws IllegalArgumentException {
+    public TupleList<T, U> zip(Iterable<? extends T> first, Iterable<? extends U> last) throws IllegalArgumentException {
         throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
     }
 
@@ -68,12 +68,12 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     }
 
     @Override
-    public void replaceFirstElements(List<T> list) throws IllegalArgumentException {
+    public void replaceFirstElements(List<? extends T> list) throws IllegalArgumentException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void replaceLastElements(List<U> list) throws IllegalArgumentException {
+    public void replaceLastElements(List<? extends U> list) throws IllegalArgumentException {
         throw new UnsupportedOperationException();
     }
 

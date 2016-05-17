@@ -43,7 +43,7 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      * @return the {@code TupleList} instance
      * @throws IllegalArgumentException if lists are of different length
      */
-    TupleList<T, U> zip(final Iterable<T> first, final Iterable<U> last) throws IllegalArgumentException;
+    TupleList<T, U> zip(final Iterable<? extends T> first, final Iterable<? extends U> last) throws IllegalArgumentException;
 
     /**
      * Add a new tuple to the end of the list.
@@ -87,14 +87,14 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      * @param list list of new elements inserted into first slot of the Tuples
      * @throws IllegalArgumentException if {@code list} and {@code TupleList} instance have different lengths
      */
-    void replaceFirstElements(final List<T> list) throws IllegalArgumentException;
+    void replaceFirstElements(final List<? extends T> list) throws IllegalArgumentException;
 
     /**
      * Replace all last elements of the {@code TupleList} instance.
      * @param list list of new elements inserted into last slot of the Tuples
      * @throws IllegalArgumentException if {@code list} and {@code TupleList} instance have different lengths
      */
-    void replaceLastElements(final List<U> list) throws IllegalArgumentException;
+    void replaceLastElements(final List<? extends U> list) throws IllegalArgumentException;
 
     /**
      * Create a new TupleList instance.
