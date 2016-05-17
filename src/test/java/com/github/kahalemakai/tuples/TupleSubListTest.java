@@ -43,9 +43,9 @@ public class TupleSubListTest {
     @Before
     public void setUp() throws Exception {
         t1 = TupleList.of(String.class, Integer.class);
-        t1.add("a", 1);
-        t1.add("b", 2);
-        t1.add("c", 3);
+        t1.put("a", 1);
+        t1.put("b", 2);
+        t1.put("c", 3);
         tuple1 = Tuple.of("a", 1);
         tuple2 = Tuple.of("b", 2);
         tuple3 = Tuple.of("c", 3);
@@ -81,7 +81,7 @@ public class TupleSubListTest {
 
     @Test
     public void testAddLast() throws Exception {
-        sl1.add("d", 4);
+        sl1.put("d", 4);
         assertEquals(3, sl1.size());
         assertEquals(4, t1.size());
         assertEquals(tuple4, t1.get(2));

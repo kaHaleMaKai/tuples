@@ -46,20 +46,20 @@ public class UnmodifiableTupleListTest {
     @Test(expected = UnsupportedOperationException.class)
     public void testSubList() throws Exception {
         TupleList<Integer, String> subList = t1.subList(0, 1);
-        subList.add(3, "c");
+        subList.put(3, "c");
     }
 
     @Before
     public void setUp() throws Exception {
         TupleList<Integer, String> t0 = TupleList.of(Integer.class, String.class);
-        t0.add(1, "a");
-        t0.add(2, "b");
+        t0.put(1, "a");
+        t0.put(2, "b");
         t1 = TupleList.unmodifiableTupleList(t0);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void testAddThrows() throws Exception {
-        t1.add(1, "2");
+        t1.put(1, "2");
     }
 
     @Test(expected = UnsupportedOperationException.class)

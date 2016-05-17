@@ -26,7 +26,7 @@ import java.util.*;
 public interface TupleList<T, U> extends List<Tuple<T, U>> {
 
     /**
-     * Convert elements from an iterable of even length into tuples and add them to the {@code TupleList}.
+     * Convert elements from an iterable of even length into tuples and put them to the {@code TupleList}.
      *
      * @param iterable iterable of even length
      * @return the {@code TupleList} instance
@@ -45,7 +45,7 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
     TupleList<T, U> fromMap(final Map<T, U> map);
 
     /**
-     * Zip elements from two lists into tuples and add them to the {@code TupleList}.
+     * Zip elements from two lists into tuples and put them to the {@code TupleList}.
      *
      * @param first list whose elements are used as first elements in the tuples
      * @param last list whose elements are used as second elements in the tuples
@@ -60,18 +60,18 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      * @param first first tuple element
      * @param last second tuple element
      */
-    default void add(final T first, final U last) {
-        add(size(), first, last);
+    default void put(final T first, final U last) {
+        put(size(), first, last);
     }
 
     /**
      * Add a new tuple at some position of the tuple list.
      *
-     * @param index position where to add the tuple
+     * @param index position where to put the tuple
      * @param first first tuple element
      * @param last second tuple element
      */
-    default void add(final int index, final T first, final U last) {
+    default void put(final int index, final T first, final U last) {
         add(index, Tuple.of(first, last));
     }
 

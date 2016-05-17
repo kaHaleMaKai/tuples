@@ -141,7 +141,7 @@ public class TupleListTest {
         assertNotEquals(t0, t1);
         assertEquals(t0, t0);
         assertNotEquals(t0, 1);
-        t1.add("p", 9);
+        t1.put("p", 9);
         assertNotEquals(t0, t1);
         TupleList<String, Number> t3 = TupleList.of(String.class, Number.class).slurp(li0);
         assertNotEquals(t0, t3);
@@ -217,6 +217,13 @@ public class TupleListTest {
     }
 
     @Test
+    public void testXXX() throws Exception {
+        final TupleList<Integer, Tuple> tuples = TupleList.of(Integer.class, Tuple.class);
+        tuples.put(1, Tuple.of(Tuple.of("a", "b"), 8));
+        tuples.put(1, Tuple.of(Tuple.of("c", "d"), 9));
+    }
+
+    @Test
     public void testFromMap() throws Exception {
         final Map<String, Integer> m = new HashMap<>();
         m.put("c", 3);
@@ -225,5 +232,5 @@ public class TupleListTest {
         assertEquals(Tuple.of("c", 3), t0.get(2));
         assertEquals(Tuple.of("d", 4), t0.get(3));
     }
-    
+
 }

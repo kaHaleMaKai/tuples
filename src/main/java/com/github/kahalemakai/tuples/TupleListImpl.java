@@ -84,14 +84,14 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
             } catch (ClassCastException e) {
                 throw new IllegalArgumentException("TupleList.fromList: list elements are of wrong type");
             }
-            this.add(firstEl, secondEl);
+            this.put(firstEl, secondEl);
         }
         return this;
     }
 
     @Override
     public TupleList<T, U> fromMap(Map<T, U> map) {
-        map.forEach(this::add);
+        map.forEach(this::put);
         return this;
     }
 
@@ -103,7 +103,7 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
         while (it1.hasNext() && it2.hasNext()) {
             final T t = it1.next();
             final U u = it2.next();
-            this.add(t, u);
+            this.put(t, u);
         }
         if (it1.hasNext() || it2.hasNext()) {
             // remove all inserted elements
