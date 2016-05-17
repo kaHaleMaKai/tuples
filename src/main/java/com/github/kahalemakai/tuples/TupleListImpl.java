@@ -90,6 +90,12 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
     }
 
     @Override
+    public TupleList<T, U> fromMap(Map<T, U> map) {
+        map.forEach(this::add);
+        return this;
+    }
+
+    @Override
     public TupleList<T, U> zip(Iterable<? extends T> first, Iterable<? extends U> last) throws IllegalArgumentException {
         final Iterator<? extends T> it1 = first.iterator();
         final Iterator<? extends U> it2 = last.iterator();
@@ -249,6 +255,11 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
 
         @Override
         public TupleList<T, U> slurp(Iterable<?> iterable) throws IllegalArgumentException {
+            throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
+        }
+
+        @Override
+        public TupleList<T, U> fromMap(Map<T, U> map) {
             throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
         }
 

@@ -58,6 +58,11 @@ class UnmodifiableTupleList<T, U> implements TupleList<T, U> {
     }
 
     @Override
+    public TupleList<T, U> fromMap(Map<T, U> map) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public TupleList<T, U> zip(Iterable<? extends T> first, Iterable<? extends U> last) throws IllegalArgumentException {
         throw new UnsupportedOperationException("Tuple subLists can only be constructed by calling subList()");
     }

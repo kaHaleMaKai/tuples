@@ -35,6 +35,15 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      */
     TupleList<T, U> slurp(final Iterable<?> iterable) throws IllegalArgumentException;
 
+
+    /**
+     * Convert a map into a {@code TupleList}.
+     *
+     * @param map map key-value pairs to tuples
+     * @return the {@code TupleList} instance
+     */
+    TupleList<T, U> fromMap(final Map<T, U> map);
+
     /**
      * Zip elements from two lists into tuples and add them to the {@code TupleList}.
      *

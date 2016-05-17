@@ -215,4 +215,15 @@ public class TupleListTest {
         assertEquals("b", list.get(2));
         assertEquals(2, list.get(3));
     }
+
+    @Test
+    public void testFromMap() throws Exception {
+        final Map<String, Integer> m = new HashMap<>();
+        m.put("c", 3);
+        m.put("d", 4);
+        t0.fromMap(m);
+        assertEquals(Tuple.of("c", 3), t0.get(2));
+        assertEquals(Tuple.of("d", 4), t0.get(3));
+    }
+    
 }
