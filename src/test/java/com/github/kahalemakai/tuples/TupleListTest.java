@@ -208,4 +208,21 @@ public class TupleListTest {
         assertEquals(0, t0.size());
     }
 
+    @Test
+    public void testAsList() throws Exception {
+        final List<List<? super Object>> list = t0.asList();
+        assertEquals("a", list.get(0).get(0));
+        assertEquals(1, list.get(0).get(1));
+        assertEquals("b", list.get(1).get(0));
+        assertEquals(2, list.get(1).get(1));
+    }
+
+    @Test
+    public void testFlatten() throws Exception {
+        final List<? super Object> list = t0.flatten();
+        assertEquals("a", list.get(0));
+        assertEquals(1, list.get(1));
+        assertEquals("b", list.get(2));
+        assertEquals(2, list.get(3));
+    }
 }

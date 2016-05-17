@@ -168,8 +168,8 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      * Return a new, unmodifiable list with all tuples flattened out.
      * @return unmodifiable list.
      */
-    default List<?> asFlatList() {
-        List<?> li = new ArrayList<>(size() * 2);
+    default List<? super Object> flatten() {
+        List<? super Object> li = new ArrayList<>(size() * 2);
         for (Tuple<T, U> tuple : this) {
             li.add(tuple.first());
             li.add(tuple.last());
@@ -181,11 +181,11 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      * Return a new unmodifiable list of Tuples instead of a TupleList.
      * @return unmodifiable List
      */
-    default List<? extends List<?>> asList() {
-        List<? extends List<?>> li = new ArrayList<>(size());
+    default List<List<? super Object>> asList() {
+        List<List<? super Object>> li = new ArrayList<>(size());
         for (Tuple<T, U> tuple : this) {
-            final List<?> elementList = new ArrayList<>(2);
-            elementList.add(tuple.first())
+            final List<? super Object> elementList = new ArrayList<>(2);
+            elementList.add(tuple.first());
             elementList.add(tuple.last());
             li.add(elementList);
         }
