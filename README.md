@@ -1,4 +1,4 @@
-# tuples [![travis-ci.org](https://travis-ci.org/kaHaleMaKai/tuples.svg?branch=master)](https://travis-ci.org/kaHaleMaKai/tuples.svg?branch=master) [![codecov.io](https://codecov.io/github/kaHaleMaKai/tuples/coverage.svg?branch=master)](https://codecov.io/github/kaHaleMaKai/tuples?branch=master)
+# tuples [![travis-ci.org](https://travis-ci.org/kaHaleMaKai/tuples.svg?branch=master)](https://travis-ci.org/kaHaleMaKai/tuples.svg?branch=master) [![codecov.io](https://codecov.io/github/kaHaleMaKai/tuples/coverage.svg?branch=master)](https://codecov.io/github/kaHaleMaKai/tuples?branch=master) [ ![Download](https://api.bintray.com/packages/kahalemakai/maven/tuples/images/download.svg) ](https://bintray.com/kahalemakai/maven/tuples/_latestVersion)
 
 tuples and type-safe tuple lists
 
