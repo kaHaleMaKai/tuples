@@ -115,13 +115,13 @@ class TupleListImpl<T, U> extends ArrayList<Tuple<T, U>> implements TupleList<T,
     }
 
     @SuppressWarnings("unchecked")
-    static <S, W> TupleListImpl<S, W> of(Class<S> firstClass, Class<W> secondClass) {
+    static <S, W> TupleListImpl<S, W> of(Class<? extends S> firstClass, Class<? extends W> secondClass) {
         return new TupleListImpl<>(firstClass, secondClass);
     }
 
 
     @SuppressWarnings("unchecked")
-    static <S> TupleListImpl<S, S> of(Class<S> elementClass) {
+    static <S> TupleListImpl<S, S> of(Class<? extends S> elementClass) {
         return new TupleListImpl<>(elementClass, elementClass);
     }
 

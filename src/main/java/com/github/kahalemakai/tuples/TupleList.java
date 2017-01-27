@@ -115,7 +115,7 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      * @return new {@code TupleList}
      */
     @SuppressWarnings("unchecked")
-    static <S, W> TupleList<S, W> of(Class<S> firstClass, Class<W> secondClass) {
+    static <S, W> TupleList<S, W> of(Class<? extends S> firstClass, Class<? extends W> secondClass) {
         return new TupleListImpl<>(firstClass, secondClass);
     }
 
@@ -127,7 +127,7 @@ public interface TupleList<T, U> extends List<Tuple<T, U>> {
      * @return new {@code TupleList}
      */
     @SuppressWarnings("unchecked")
-    static <S> TupleList<S, S> of(Class<S> elementClass) {
+    static <S> TupleList<S, S> of(Class<? extends S> elementClass) {
         return TupleList.of(elementClass, elementClass);
     }
 
