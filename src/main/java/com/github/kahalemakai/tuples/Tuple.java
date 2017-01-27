@@ -20,16 +20,21 @@ package com.github.kahalemakai.tuples;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * A typed tuple class.
+ * A typed {@code Tuple} class.
  */
 @EqualsAndHashCode
 @Accessors(fluent = true)
-public class Tuple<T, U> {
+@RequiredArgsConstructor(staticName = "of")
+public final class Tuple<T, U> implements NTuple {
+
+    private static final String ERROR_MSG = "expected: index in (0, 1). got: ";
+
     /**
-     * Get the first element of the tuple.
+     * Get the first element of the {@code Tuple}.
      *
      * @return the first element
      */
@@ -37,30 +42,12 @@ public class Tuple<T, U> {
     final private T first;
 
     /**
-     * Get the second element of the tuple.
+     * Get the second element of the {@code Tuple}.
      *
      * @return the second element
      */
     @Getter
     final private U last;
-
-    private Tuple(T first, U last) {
-        this.first = first;
-        this.last = last;
-    }
-
-    /**
-     * Return a new tuple instance.
-     *
-     * @param first first tuple element
-     * @param last second tuple element
-     * @param <S> class of first element
-     * @param <W> class of second element
-     * @return a new tuple
-     */
-    public static <S, W> Tuple<S, W> of(final S first, final W last) {
-        return new Tuple<>(first, last);
-    }
 
     @Override
     public String toString() {
@@ -68,12 +55,25 @@ public class Tuple<T, U> {
     }
 
     /**
-     * Check if a tuple contains an object.
-     *
-     * @param o object to be looked up
-     * @return whether object is present or not
+     * {@inheritDoc}
      */
+    @Override
     public boolean contains(Object o) {
         return first.equals(o) || last.equals(o);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(int index) {
+        if (index == 0) {
+            return first;
+        }
+        else if (index == 1) {
+            return last;
+        }
+        throw new IllegalArgumentException(ERROR_MSG + index);
+    }
+
 }

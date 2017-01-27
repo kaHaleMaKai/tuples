@@ -44,6 +44,12 @@ public class TupleTest {
         assertFalse(t1.equals(t5));
     }
 
+    @Test
+    public void testGet() throws Exception {
+        assertEquals(t1.first(), t1.get(0));
+        assertEquals(t1.last(), t1.get(1));
+    }
+
     @Before
     public void setUp() throws Exception {
         t1 = Tuple.of(1, "a");
