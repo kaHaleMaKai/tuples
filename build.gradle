@@ -21,11 +21,12 @@ plugins {
 }
 
 group 'com.github.kahalemakai'
-version '0.3.0'
+version '0.4.0'
 def license = "GPL 3.0"
 def vcsUrl = 'https://github.com/kaHaleMaKai/tuples.git'
 description """Type-safe tuples and tuple list"""
-def delombokDir = "${buildDir}/src-delomboked"
+def delombokedDir = "${buildDir}/src-delomboked"
+def lombokDependency = 'org.projectlombok:lombok:1.16.12'
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -37,24 +38,34 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    compile 'org.projectlombok:lombok:1.16.8'
+    compileOnly lombokDependency
     testCompile 'junit:junit:4.12'
 }
 
-task delombok {
-    description 'Delomboks the source code'
-    ant.taskdef(classname: 'lombok.delombok.ant.Tasks$Delombok', classpath: configurations.compile.asPath,  name: 'delombok')
-    ant.mkdir(dir: delombokDir)
-    ant.delombok(verbose: 'true', encoding: 'UTF-8', to: 'build/src-delomboked', from: 'src/main/java')
+configurations {
+    lombok
+    lombok.extendsFrom configurations.compile
+    dependencies {
+        compile lombokDependency
+    }
 }
 
-task javadocDelux(type: Javadoc) {
+task delombok {
+    doLast {
+        description 'Delomboks the source code'
+        ant.taskdef(classname: 'lombok.delombok.ant.Tasks$Delombok', classpath: configurations.lombok.asPath, name: 'delombok')
+        ant.mkdir(dir: delombokedDir)
+        ant.delombok(verbose: 'true', encoding: 'UTF-8', to: delombokedDir, from: 'src/main/java')
+    }
+}
+
+task javadoc(type: Javadoc, group: "documentation", overwrite: true) {
     dependsOn delombok
-    source delombokDir
+    source delombokedDir
 }
 
 jacocoTestReport {
@@ -65,8 +76,8 @@ jacocoTestReport {
 
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
-    from javadocDelux
-    dependsOn javadocDelux
+    from javadoc
+    dependsOn javadoc
 }
 
 task sourcesJar(type: Jar) {
