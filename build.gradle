@@ -117,4 +117,8 @@ bintray {
     }
 }
 
-defaultTasks 'clean', 'test', 'build', 'jacocoTestReport', 'javadocDelux'
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
+
+defaultTasks 'clean', 'test', 'build', 'jacocoTestReport', 'javadoc'
